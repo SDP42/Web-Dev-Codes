@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Components Practical</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        text-align: center;
+        padding: 30px;
+      }
+
+      .card {
+        background: white;
+        width: 300px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        background: #0d6efd;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      function FunctionalCounter() {
+        const [count, setCount] = useState(0);
+
+        return (
+          <div className="card">
+            <h2>Functional Component</h2>
+
+            <h3>Count : {count}</h3>
+
+            <button onClick={() => setCount(count + 1)}>Increment</button>
+          </div>
+        );
+      }
+
+      class ClassCounter extends React.Component {
+        constructor() {
+          super();
+
+          this.state = {
+            count: 0,
+          };
+        }
+
+        increment = () => {
+          this.setState({
+            count: this.state.count + 1,
+          });
+        };
+
+        render() {
+          return (
+            <div className="card">
+              <h2>Class Component</h2>
+
+              <h3>Count : {this.state.count}</h3>
+
+              <button onClick={this.increment}>Increment</button>
+            </div>
+          );
+        }
+      }
+
+      function App() {
+        return (
+          <div>
+            <h1>React Components & useState Demo</h1>
+
+            <FunctionalCounter />
+
+            <ClassCounter />
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>

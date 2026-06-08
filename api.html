@@ -1,0 +1,215 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Multi API Dashboard</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      button {
+        padding: 10px;
+        background: #4facfe;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #007bff;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      #output {
+        margin-top: 15px;
+        padding: 15px;
+        background: #f5f5f5;
+        border-radius: 8px;
+      }
+
+      img {
+        max-width: 250px;
+        display: block;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Multi API Dashboard</h1>
+
+      <input
+        type="text"
+        id="searchBox"
+        placeholder="Enter Country / University Country"
+      />
+
+      <div class="buttons">
+        <button onclick="countryAPI()">Country Info</button>
+
+        <button onclick="randomUserAPI()">Random User</button>
+
+        <button onclick="catFactAPI()">Cat Fact</button>
+
+        <button onclick="dogAPI()">Dog Image</button>
+
+        <button onclick="universityAPI()">Universities</button>
+
+        <button onclick="currencyAPI()">USD Rates</button>
+      </div>
+
+      <div id="output">API Output Appears Here</div>
+    </div>
+
+    <script>
+      function countryAPI() {
+        let country = document.getElementById("searchBox").value;
+
+        fetch(`https://restcountries.com/v3.1/name/${country}`)
+          .then((response) => response.json())
+          .then((data) => {
+            let c = data[0];
+
+            document.getElementById("output").innerHTML = `
+<h2>${c.name.common}</h2>
+
+<img src="${c.flags.png}">
+
+<p><b>Capital:</b> ${c.capital[0]}</p>
+
+<p><b>Region:</b> ${c.region}</p>
+
+<p><b>Population:</b> ${c.population.toLocaleString()}</p>
+`;
+          })
+          .catch(() => {
+            document.getElementById("output").innerHTML = "Country Not Found";
+          });
+      }
+
+      function randomUserAPI() {
+        fetch("https://randomuser.me/api/")
+          .then((response) => response.json())
+          .then((data) => {
+            let u = data.results[0];
+
+            document.getElementById("output").innerHTML = `
+<h2>Random User</h2>
+
+<img src="${u.picture.large}">
+
+<p><b>Name:</b>
+${u.name.first}
+${u.name.last}</p>
+
+<p><b>Email:</b>
+${u.email}</p>
+
+<p><b>Country:</b>
+${u.location.country}</p>
+`;
+          });
+      }
+
+      function catFactAPI() {
+        fetch("https://catfact.ninja/fact")
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("output").innerHTML = `
+<h2>Cat Fact</h2>
+
+<p>${data.fact}</p>
+`;
+          });
+      }
+
+      function dogAPI() {
+        fetch("https://dog.ceo/api/breeds/image/random")
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("output").innerHTML = `
+<h2>Random Dog</h2>
+
+<img src="${data.message}">
+`;
+          });
+      }
+
+      function universityAPI() {
+        let country = document.getElementById("searchBox").value;
+
+        fetch(`http://universities.hipolabs.com/search?country=${country}`)
+          .then((response) => response.json())
+          .then((data) => {
+            let result = "<h2>Universities</h2>";
+
+            data.slice(0, 5).forEach((u) => {
+              result += `<p>${u.name}</p>`;
+            });
+
+            document.getElementById("output").innerHTML = result;
+          });
+      }
+
+      function currencyAPI() {
+        fetch("https://open.er-api.com/v6/latest/USD")
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("output").innerHTML = `
+<h2>USD Exchange Rates</h2>
+
+<p><b>INR:</b> ${data.rates.INR}</p>
+
+<p><b>EUR:</b> ${data.rates.EUR}</p>
+
+<p><b>GBP:</b> ${data.rates.GBP}</p>
+`;
+          });
+      }
+    </script>
+  </body>
+</html>
+```
