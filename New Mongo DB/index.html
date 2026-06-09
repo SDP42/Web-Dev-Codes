@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>CRUD API Dashboard</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f9;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      h1 {
+        text-align: center;
+        color: #0d6efd;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+
+      th {
+        background: #0d6efd;
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Express.js & MongoDB CRUD API</h1>
+
+      <p>
+        This project demonstrates Create, Read, Update and Delete operations
+        using Express.js, MongoDB and Mongoose.
+      </p>
+
+      <table>
+        <tr>
+          <th>Operation</th>
+          <th>URL</th>
+        </tr>
+
+        <tr>
+          <td>Create</td>
+          <td>http://localhost:3000/add</td>
+        </tr>
+
+        <tr>
+          <td>Read All</td>
+          <td>http://localhost:3000/users</td>
+        </tr>
+
+        <tr>
+          <td>Read Single</td>
+          <td>http://localhost:3000/users/id</td>
+        </tr>
+
+        <tr>
+          <td>Update</td>
+          <td>http://localhost:3000/update/id/Ram/25/ram@gmail.com</td>
+        </tr>
+
+        <tr>
+          <td>Delete</td>
+          <td>http://localhost:3000/delete/id</td>
+        </tr>
+      </table>
+
+      <h2>Technologies Used</h2>
+
+      <ul>
+        <li>Node.js</li>
+        <li>Express.js</li>
+        <li>MongoDB</li>
+        <li>Mongoose</li>
+        <li>REST API</li>
+      </ul>
+    </div>
+  </body>
+</html>
